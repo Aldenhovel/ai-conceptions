@@ -26,29 +26,23 @@
 
 ## 匈牙利算法
 
-匈牙利算法是解决上面 **最小带权二分图匹配(Minimum-Weight Bipartite matching)** 的最重要算法，在原理上可以通过增广边来实现，请参考：
+匈牙利算法是解决上面 **最小带权二分图匹配(Minimum-Weight Bipartite matching)** 的最重要算法，在原理上可以通过增广边来实现，请参考：[匈牙利算法（二分图）](https://www.cnblogs.com/shenben/p/5573788.html)，在计算上可以参考：[14-4: 匈牙利算法 Hungarian Algorithm]( https://www.bilibili.com/video/BV16K4y1X7Ph?share_source=copy_web&vd_source=8f6b0c8c42ee567252d4934bac66d3f6)。算法概括如下：
 
-https://www.cnblogs.com/shenben/p/5573788.html
-
-在计算上可以参考：
-
-[14-4: 匈牙利算法 Hungarian Algorithm]( https://www.bilibili.com/video/BV16K4y1X7Ph?share_source=copy_web&vd_source=8f6b0c8c42ee567252d4934bac66d3f6)
-
-在邻接矩阵中，把每一行减去行最小值，再每一列减去列最小值。
+1. 在邻接矩阵中，把每一行减去行最小值，再每一列减去列最小值。
 
 <img src="img/a1.jpg" alt="a1" style="zoom:33%;" />
 
 <img src="img/a2.jpg" alt="a2" style="zoom:33%;" />
 
-用最少的横线或竖线把所有的`0`都覆盖：
+2. 用最少的横线或竖线把所有的`0`都覆盖：
 
 <img src="img/a3.jpg" alt="a3" style="zoom:33%;" />
 
-判断是否应该结束，令 `n = n_rows (or n_columns)`，假如横竖线数量不少于 `n`，即停止，否则继续迭代矩阵：
+3. 判断是否应该结束，令 `n = n_rows (or n_columns)`，假如横竖线数量不少于 `n`，即停止，否则继续迭代矩阵：
 
 <img src="img/a4.jpg" alt="a4" style="zoom:33%;" />
 
-在没有被横竖线覆盖的元素中，找到最小值 `k` 将所有未覆盖元素减去 `k`，所有线交叉处加上 `k` ：
+4. 在没有被横竖线覆盖的元素中，找到最小值 `k` 将所有未覆盖元素减去 `k`，所有线交叉处加上 `k` ：
 
 <img src="img/a5.jpg" alt="a5" style="zoom:33%;" />
 
@@ -56,11 +50,11 @@ https://www.cnblogs.com/shenben/p/5573788.html
 
 <img src="img/a7.jpg" alt="a7" style="zoom:33%;" />
 
-得到新的矩阵，继续回到 A 操作，寻找最少能够覆盖所有 `0` 的横竖线······直到在某一次迭代中在 B 操作满足要求退出迭代，得到矩阵：
+5. 得到新的矩阵，继续回到操作 2. ，寻找最少能够覆盖所有 `0` 的横竖线······直到在某一次迭代中在 B 操作满足要求退出迭代，得到矩阵：
 
 <img src="img/a8.jpg" alt="8" style="zoom:33%;" />
 
-在最后的矩阵中，我们关注 $u_i$ 中 `0` 的位置，为各个 $u_i$ 分配对应的 $v_j$ 结点：
+6. 在最后的矩阵中，我们关注 $u_i$ 中 `0` 的位置，为各个 $u_i$ 分配对应的 $v_j$ 结点：
 
 <img src="img/a9.jpg" alt="a9" style="zoom:33%;" />
 
