@@ -1,4 +1,6 @@
-# Bipartite Matching 二分图匹配
+# Bipartite Matching & Hungarian Algorithm
+
+二分图匹配与匈牙利算法，出现在 **DETR** 的目标检测匹配上。
 
 ## **概念描述**
 
