@@ -38,7 +38,6 @@ NLP 使用的位置编码：
 
 $$
 \begin{cases}
-
 PE(pos,2i)&=sin(\dfrac{pos}{10000^{2i/d_{model}}})\\
 PE(pos,2i+1)&=cos(\dfrac{pos}{10000^{2i/d_{model}}})\\
 \end{cases}
