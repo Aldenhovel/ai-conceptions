@@ -6,23 +6,23 @@
 
 **二分图(Bipartite)** 二分图又称作二部图，是图论中的一种特殊模型。设 $G=(V,E)$ 是一个无向图。如顶点集 $V$ 可分割为两个互不相交的子集，并且图中每条边依附的两个顶点都分属两个不同的子集。则称图 $G$ 为二分图。我们将上边顶点集合称为 $V_X$ 集合，下边顶点结合称为 $V_Y$ 集合，如下图就是一个二分图：
 
-<img src="img/1.jpg" alt="1" style="zoom: 33%;" />
+<img src="img/1.jpg" alt="1" style="zoom: 25%;" />
 
 **匹配(Matching)** 给定一个二分图 $G$ ，在 $G$ 的一个子图 $M$ 中， $M$ 的边集 ${E}$ 中的任意两条边都不依附于同一个顶点，则称 $M$ 是一个匹配。如下，在子图中两条边都不依附同一个顶点，因此它是 $G$ 的一个匹配：
 
-<img src="img/2.jpg" alt="2" style="zoom:33%;" />
+<img src="img/2.jpg" alt="2" style="zoom: 25%;" />
 
 **极大匹配(Maximal Matching)** 是指在当前已完成的匹配下,无法再通过增加未完成匹配的边的方式来增加匹配的边数。如下，在子图中已经不能再添加任何一条边来扩大匹配了（  $x_3$ 和 $x_4$ 在 $G$ 中并无边相连），因此它是一个极大匹配：
 
-<img src="img/3.jpg" alt="3" style="zoom:33%;" />
+<img src="img/3.jpg" alt="3" style="zoom: 25%;" />
 
 **最大匹配(Maximum Matching)** 是所有极大匹配当中边数最大的一个匹配。选择这样的边数最大的子集称为图的最大匹配问题。如下，通过改变一批匹配的边可以让 $V_X$ 和 $V_Y$ 所有的点都连接上，因此这是一个最大匹配：
 
-<img src="img/4.jpg" alt="4" style="zoom:33%;" />
+<img src="img/4.jpg" alt="4" style="zoom: 25%;" />
 
 **最小带权二分图匹配(Minimum-Weight Bipartite matching)** 给定一组对应的 $V_X$ 和 $V_Y$ 及两两之间的 $cost$ 要求通过算法，找到 $cost$ 最小那组匹配。一般是输入一个带权矩阵，输出边集。
 
-<img src="img/5.jpg" alt="5" style="zoom:33%;" />
+<img src="img/5.jpg" alt="5" style="zoom: 25%;" />
 
 ## 匈牙利算法
 
@@ -30,33 +30,33 @@
 
 1. 在邻接矩阵中，把每一行减去行最小值，再每一列减去列最小值。
 
-<img src="img/a1.jpg" alt="a1" style="zoom:33%;" />
+<img src="img/a1.jpg" alt="a1" style="zoom: 25%;" />
 
-<img src="img/a2.jpg" alt="a2" style="zoom:33%;" />
+<img src="img/a2.jpg" alt="a2" style="zoom: 25%;" />
 
 2. 用最少的横线或竖线把所有的`0`都覆盖：
 
-<img src="img/a3.jpg" alt="a3" style="zoom:33%;" />
+<img src="img/a3.jpg" alt="a3" style="zoom: 25%;" />
 
 3. 判断是否应该结束，令 `n = n_rows (or n_columns)`，假如横竖线数量不少于 `n`，即停止，否则继续迭代矩阵：
 
-<img src="img/a4.jpg" alt="a4" style="zoom:33%;" />
+<img src="img/a4.jpg" alt="a4" style="zoom: 25%;" />
 
 4. 在没有被横竖线覆盖的元素中，找到最小值 `k` 将所有未覆盖元素减去 `k`，所有线交叉处加上 `k` ：
 
-<img src="img/a5.jpg" alt="a5" style="zoom:33%;" />
+<img src="img/a5.jpg" alt="a5" style="zoom: 25%;" />
 
-<img src="img/a6.jpg" alt="a6" style="zoom:33%;" />
+<img src="img/a6.jpg" alt="a6" style="zoom: 25%;" />
 
-<img src="img/a7.jpg" alt="a7" style="zoom:33%;" />
+5. 得到新的矩阵，继续回到操作 2. ，寻找最少能够覆盖所有 `0` 的横竖线······直到在某一次迭代中在 3. 操作满足要求退出迭代，得到矩阵：
 
-5. 得到新的矩阵，继续回到操作 2. ，寻找最少能够覆盖所有 `0` 的横竖线······直到在某一次迭代中在 B 操作满足要求退出迭代，得到矩阵：
+   <img src="img/a7.jpg" alt="a7" style="zoom: 25%;" />
 
-<img src="img/a8.jpg" alt="8" style="zoom:33%;" />
+<img src="img/a8.jpg" alt="8" style="zoom: 25%;" />
 
 6. 在最后的矩阵中，我们关注 $u_i$ 中 `0` 的位置，为各个 $u_i$ 分配对应的 $v_j$ 结点：
 
-<img src="img/a9.jpg" alt="a9" style="zoom:33%;" />
+<img src="img/a9.jpg" alt="a9" style="zoom: 25%;" />
 
 ## 代码
 
