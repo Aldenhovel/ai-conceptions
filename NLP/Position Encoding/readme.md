@@ -1,6 +1,6 @@
 # Position Encoding
 
-位置编码，出现在各大 **Transformer** 的预处理。首先提一下 `encoding` （编码）和 `embedding` （嵌入）的区别：一般认为 `encoding` 是一个过程，出来的结果是 `embedding` 。
+位置编码，出现在各大 **Transformer** 的预处理。首先提一下 `encoding` （编码）和 `embedding` （嵌入）的区别：一般认为 `encoding` 是一个过程，出来的结果是 `embedding` ，在本文指的是同一件事。
 
 ## 历史
 
@@ -151,13 +151,17 @@ class PositionEmbeddingLearned(nn.Module):
 ## 为什么可以直接相加到 Word Embedding
 
  假设词向量 $x^i \in R^{d_{model}\times 1}$ ，映射矩阵 $W\in R^{d_{model}\times d_{model}}$ ，于是在没有位置编码时映射结果为：
+ 
 $$
 W \cdot x^i \in R^{d_{model}\times1}
 $$
+
 假设现在在 $x^i$ concat 一个 $n$ 维位置向量 $x^p \in R^{n\times1}$ ，可以表示为 $x^i \leftarrow [(x^i)^T,(x^p)^T]^T \in R^{(d_{model}+n) \times 1}$ ，同样变换矩阵应变为 $W\leftarrow [W_i, W_p] \in R^{d_{model}\times(d_{model}+n)}$ ，此时映射结果为：
+
 $$
 W \cdot x^i= [W_i, W_p] \cdot [(x^i)^T,(x^p)^T]^T  = W_i \cdot x^i + W_p \cdot x^p=embed^i + pos^i
 $$
+
 可以看到：将词和位置映射后相加，跟将词与位置 concat 后再映射，再本质上是一样的， **虽然维度没有增加但位置信息已经融入到了向量中** 。
 
 ## 参考资料
