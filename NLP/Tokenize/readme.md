@@ -10,7 +10,7 @@ NLP 中由语句转化为训练模型数据时经过的中间环节，需要：
 此外，在驶入模型前还需要：
 
 5.  **Padding** 填充词序列到统一长度。
-6.  **Covert to ids** 
+6.  **Covert to ids** 将词 `token` 根据词表转化为数值 `token` 。
 
 ## Normalization
 
