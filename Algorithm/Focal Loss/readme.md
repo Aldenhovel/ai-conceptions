@@ -3,10 +3,12 @@
 ## 公式
 
 $$
+
 L_{fl} = \begin{cases}
 - \sigma^\gamma(-x)\log \sigma(x)\quad, y=1\\
 - \sigma^\gamma(x)\log \sigma(-x)\quad, y=0
 \end{cases}
+
 $$
 
 ## 代码
