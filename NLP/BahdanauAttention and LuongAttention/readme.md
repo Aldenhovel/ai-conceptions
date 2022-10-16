@@ -4,17 +4,16 @@
 
 ![img1](img/1.png)
 
-在原有的 Encoder-Decoder 中加入了 $attention~weights$  , $context~vector$ 和 $attention~vector$ 。这样在 Decoder 每次解码 $h_t$ 时都会考虑以前编码时的每个输出隐层状态 $\hat{h}_s$ ，并且计算出对每个 $\hat{h}_s$ 的注意力得到 $attention~weights$ ，它与 $\hat{h}_s$ 的加权和即为 $context~vector$ ，最后通过与 $h_{t-1}$ 拼接、映射和激活得 $attention~vector$ ，公式描述如下：
+在原有的 Encoder-Decoder 中加入了 **attention weights**  , **context vector** 和 **attention vector** 。这样在 Decoder 每次解码 $h_t$ 时都会考虑以前编码时的每个输出隐层状态 $\hat{h}_s$ ，并且计算出对每个 $\hat{h}_s$ 的注意力得到 **attention weights** ，再求得 **context vector** ，最后拼接、映射和激活得 **attention vector**，公式描述如下：
+
 $$
 \begin{align}
 \alpha_{ts} &= \dfrac{\text{exp(score(} h_t,\hat{h}_s \text{))}}{\sum^S_{s'=1}\text{exp(score(} h_t, \hat h_{s'} \text{))}}\quad &\text{[Attention weights]}\\
-
 c_t &= \sum_s \alpha_{ts} \hat h_s\quad &\text{[Context vector]}\\
-
 a_t &= f(c_t, h_t) = \text{tanh}(W_c\cdot[c_t;h_t])\quad &\text{[Attention vector]}
-
 \end{align}
 $$
+
 解释一下，这里 $h$ 指没经注意力变换的隐层状态（对应上图红、蓝色）， $\hat h$ 指经过注意力变换后的隐层状态（对应上图棕色）。
 
 ## Bahdanau Attention
@@ -36,14 +35,13 @@ Luong Attention 可以看作 Bahdanau Attention 的一个兄弟，主要区别�
 2. 采用了 $h_t$ 来参与注意力而非 $\hat{h}_{t-1}$ 。
 
 3. Bahdanau Attention 仅对 $\text{score}$ 采用 concat 的操作计算， Luong Attention 补充了另外两种对齐函数：
+   
    $$
    \text{score}(h_t,\hat h_s)=
    \begin{cases}
    h^\mathsf{T}\hat h_s\\
    h^\mathsf{T} W  \hat{h}_s\\
-   v^\mathsf{T} \text{tanh}(W\cdot[h_t;\hat h_s])
-   
-   
+   v^\mathsf{T} \text{tanh}(W\cdot[h_t;\hat h_s]) 
    \end{cases}
    $$
 
