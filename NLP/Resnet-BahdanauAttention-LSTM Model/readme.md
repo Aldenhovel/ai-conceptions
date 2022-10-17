@@ -62,11 +62,16 @@ class BahdanauAttention(nn.Module):
             context_vector: Tensor[batch_size, enc_hidden_size]
             attention_weights: Tensor[batch_size, num_pixels]
         """
-        h_state = h_state.unsqueeze(1) # [batch_size, 1, dec_hidden_size]
-        score = F.elu(self.W1(features) + self.W2(h_state)) # [batch_size, num_pixels, hidden_size]
-        attention_weights = F.softmax(self.V(score), dim=1) # [batch_size, num_pixels, 1]
-        context_vector = attention_weights * features # [batch_size, num_pixels, enc_hidden_size]
-        context_vector = torch.sum(context_vector, dim=1) # [batch_size, enc_hidden_size]
+        h_state = h_state.unsqueeze(1) 
+        # [batch_size, 1, dec_hidden_size]
+        score = F.elu(self.W1(features) + self.W2(h_state)) 
+        # [batch_size, num_pixels, hidden_size]
+        attention_weights = F.softmax(self.V(score), dim=1) 
+        # [batch_size, num_pixels, 1]
+        context_vector = attention_weights * features 
+        # [batch_size, num_pixels, enc_hidden_size]
+        context_vector = torch.sum(context_vector, dim=1) 
+        # [batch_size, enc_hidden_size]
         return context_vector, attention_weights.squeeze(2)
 ```
 
@@ -141,5 +146,113 @@ class DecoderWithBahdanauAttention(nn.Module):
         logit = self.fc(self.dropout(output)) # [1, batch_size, vocab_size]
         logit = logit.squeeze(0) # [batch_size, vocab_size]
         return logit, h_state, c_state, attention_weights
+```
+
+## model
+
+```python
+class AutoEncoder(nn.Module):
+    
+    def __init__(self, encoder, decoder, device):
+        super(AutoEncoder, self).__init__()
+        self.encoder = encoder
+        self.decoder = decoder
+        self.init_h0 = nn.Linear(encoder.hidden_size, decoder.hidden_size)
+        self.init_c0 = nn.Linear(encoder.hidden_size, decoder.hidden_size)
+        self.device = device
+        
+    def forward(self, images, target_sequences, sequence_lengths, tf_ratio):
+        """
+        :param
+            images: Tensor[batch_size, 3, img_size, img_size]
+            target_sequences: Tensor[batch_size, seq_len]
+            sequence_lengths: Tensor[batch_size,]
+            tf_ratio: float
+        :return
+            logits: Tensor[max(decode_lengths), batch_size, vocab_size]
+            logits: Tensor[batch_size, max(decode_lengths), num_pixels]
+            sorted_target_sequences: Tensor[seq_len, batch_size]
+            sorted_decode_lengths: list[seq_len]
+            sorted_indices: list[batch_size]
+        """
+        batch_size = images.size(0)
+        
+        # Encoding
+        image_features = self.encoder(images) 
+        # [batch_size, 14, 14, hidden_size]
+        image_features = image_features.view(batch_size, -1, self.encoder.hidden_size) 
+        # [batch_size, num_pixels, enc_hidden_size]
+        num_pixels = image_features.size(1)
+        
+        # Sort the batch by decreasing lengths
+        sorted_sequence_lengths, sorted_indices = torch.sort(sequence_lengths, 
+                                                             dim=0, 
+                                                             descending=True)
+        sorted_image_features = image_features[sorted_indices] 
+        # [batch_size, num_pixels, enc_hidden_size]
+        sorted_target_sequences = target_sequences[sorted_indices] 
+        # [seq_len, batch_size]
+        
+        ## Init hidden and memory states
+        mean_image_features = sorted_image_features.mean(dim=1) 
+        # [batch_size, enc_hidden_size]
+        h_state = self.init_h0(mean_image_features)
+        c_state = self.init_c0(mean_image_features) 
+        # [batch_size, dec_hidden_size]
+        h_state, c_state = h_state.unsqueeze(0), c_state.unsqueeze(0) 
+        # [1, batch_size, dec_hidden_size]
+        
+        ## We won't decode at the <eos> position, 
+        ## since we've finished generating as soon as we generate <eos>
+        ## So, decoding lengths are actual lengths - 1
+        ## 这里将语句从长到短排序，表示每个每个句子要解码的长度，
+        ## 减1是因为最后一个 <eos> 是不需要解码的，因此所有语句解码长度都减1
+        sorted_decode_lengths = (sorted_sequence_lengths - 1).tolist()
+        
+        # Decoding
+        ## 这里的 logits 对应每个时间步的解码结果， alphas 是 abhdanau attn 里面的 alpha
+        ## 因此 logits.shape 对应 (seq_len, B, hidden_size) 用于 LSTM 输入
+        ## alphas.shape 对应 (B, seq_len, num_pixels) 对应每个词和 CNN 特征图的注意力
+        logits = torch.zeros(max(sorted_decode_lengths), 
+                             batch_size, 
+                             self.decoder.vocab_size
+                            ).to(self.device)
+        alphas = torch.zeros(batch_size, 
+                             max(sorted_decode_lengths), 
+                             num_pixels
+                            ).to(self.device)
+        
+        
+        last = None
+        for t in range(max(sorted_decode_lengths)):
+            batch_size_t = sum([l > t for l in sorted_decode_lengths])
+            
+            # 这里实际上等价于
+            if last is not None:
+                ## tf_ratio=0，这一步不会发生
+                if random.random() < tf_ratio:
+                    in_ = last[:batch_size_t]
+                else:
+                    in_ = sorted_target_sequences[:batch_size_t, t]
+            else:
+                in_ = sorted_target_sequences[:batch_size_t, t]
+            
+            logit, h_state, c_state, attention_weights \
+            = self.decoder(in_,
+                           h_state[:, :batch_size_t, :],
+                           c_state[:, :batch_size_t, :],
+                           sorted_image_features[:batch_size_t, :, :])
+            
+            
+            logits[t, :batch_size_t, :] = logit
+            alphas[:batch_size_t, t, :] = attention_weights
+            last = torch.argmax(F.softmax(logit, dim=1), dim=1) 
+            # [batch_size,]
+        
+        return logits, \
+                alphas, \
+                sorted_target_sequences, \
+                sorted_decode_lengths, \
+                sorted_indices
 ```
 
