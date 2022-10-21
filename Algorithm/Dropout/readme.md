@@ -56,9 +56,19 @@ $$
 
 如果不采取任何措施会导致在训练时的层输出预期变为测试时的 $1-p$ 倍，输出的分布改变了，对模型的影响会很大，于是我们考虑将 Dropout 后的结果除以 $(1-p)$ 将期望变得与原先一致。
 
+## 调试 Dropout 概率
+
+dropout 概率 $p$ 是一个需要设置的超参数，它的取值会直接影响模型最终到达的状态是过拟合还是欠拟合，因此想要得到最佳模型，需要反复调试 $p$ 的取值：
+
+1. 在无 Dropout 的情况下训练模型，看看是否过拟合。若处于欠拟合状态，则需要调整模型结构。
+2. 若产生过拟合，则增大 $p$ 重复训练，看看过拟合是否缓解。
+3. 若多次增大 $p$ 后过拟合现象消失，但评价指标也出现下降，则有可能陷入欠拟合，这时应该减小 $p$。
+4. 经过多次对 $p$ 的增、减后可以大致得到平衡点，此时模型拟合程度最佳。
+
 ## 参考
 
 1.  [Microstrong](https://www.zhihu.com/people/MicrostrongAI), [深度学习中Dropout原理解析]( [Microstrong](https://www.zhihu.com/people/MicrostrongAI))
 2. Srivastava, Hinton, Krizhevsky, Sutskever and Salakhutdinov, [Dropout: A Simple Way to Prevent Neural Networks from Overfitting](https://wtf-deeplearning.github.io/optimization-regularization/srivastava14a.pdf)
 3. [修炼之路](https://xiulian.blog.csdn.net/), [正则化之dropout(随机失活)详细介绍](https://blog.csdn.net/sinat_29957455/article/details/81023154)
+4.  [sueong](https://blog.csdn.net/sueong), [设置dropout参数技巧](https://blog.csdn.net/sueong/article/details/125794554)
 
