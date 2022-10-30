@@ -6,6 +6,7 @@
 - [Tokenize 标记解析](https://github.com/Aldenhovel/ai-conceptions/tree/main/NLP/Tokenize), in NLP, 20221012.
 - [BahdanauAttention and LuongAttention](https://github.com/Aldenhovel/ai-conceptions/blob/main/NLP/BahdanauAttention%20and%20LuongAttention/readme.md), in NLP, 20221016.
 - [Beam Search 束搜索](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Beam%20Search), in Algorithm, 20221018.
-- [Dropout](https://github.com/Aldenhovel/ai-conceptions/blob/main/Algorithm/Dropout/readme.md), in Algorithm, 20221020.
+- [Dropout](https://github.com/Aldenhovel/ai-conceptions/blob/main/Algorithm/Dropout), in Algorithm, 20221020.
+- [PCA Decomposition](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/PCA), in Algorithm, 20221030.
   
 
