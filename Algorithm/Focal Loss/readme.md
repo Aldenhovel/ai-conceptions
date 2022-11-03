@@ -88,3 +88,38 @@ b = torch.ones(10).long()
 focal_loss(a, b)
 ```
 
+## BCEFocalLoss
+
+使用 BCELoss + FocalLoss 可以实现多标签分类。
+$$
+\begin{align}
+\begin{cases}
+&-\alpha&(1-pred)^\gamma &\log(pred)\quad&, \text{when } label=1\\
+&-(1-\alpha)&(pred)^\gamma &\log(1-pred)\quad&, \text{when } label=0
+\end{cases}
+\end{align}
+$$
+其中 $\alpha$ 用来调节容易样本和困难样本的 $loss$ ，$\gamma$ 用来调节样本数量不均衡的 $loss$ 。
+
+代码：
+
+```python
+class BCEFocalLoss(torch.nn.Module):
+    def __init__(self, gamma=2, alpha=0.25, reduction='mean'):
+        super(BCEFocalLoss, self).__init__()
+        self.gamma = gamma
+        self.alpha = alpha
+        self.reduction = reduction
+ 
+    def forward(self, predict, target):
+        pt = predict
+        loss = (-self.alpha) * (1 - pt) ** self.gamma * torch.log(pt) * target \
+            - (1 - self.alpha) * (pt ** self.gamma) * torch.log(1 - pt) * (1 - target)
+ 
+        if self.reduction == 'mean':
+            loss = torch.mean(loss)
+        elif self.reduction == 'sum':
+            loss = torch.sum(loss)
+        return loss
+```
+
