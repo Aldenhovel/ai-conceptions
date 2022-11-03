@@ -91,6 +91,7 @@ focal_loss(a, b)
 ## BCEFocalLoss
 
 使用 BCELoss + FocalLoss 可以实现多标签分类。
+
 $$
 \begin{align}
 \begin{cases}
@@ -99,7 +100,8 @@ $$
 \end{cases}
 \end{align}
 $$
-其中 $\alpha$ 用来调节容易样本和困难样本的 $loss$ ，$\gamma$ 用来调节样本数量不均衡的 $loss$ 。
+
+其中 $\alpha$ 用来调节容易样本和困难样本的 $loss$  ， $\gamma$ 用来调节样本数量不均衡的 $loss$ 。
 
 代码：
 
