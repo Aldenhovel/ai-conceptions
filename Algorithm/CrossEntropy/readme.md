@@ -36,7 +36,7 @@ $$
 \text{CrossEntropy}(P, Q)=-\sum_i^nP(x_i)\log_2Q(x_i)
 $$
 
-特别地，当 $x_i \in 0,1$ 只有两类时，令 $P(1)=y$ 、$Q(1)=x$ 化简得二分类交叉熵公式：
+特别地，当 $x_i \in 0,1$ 只有两类时，令 $P(1)=y$ 、 $Q(1)=x$ 化简得二分类交叉熵公式：
 
 $$
 \text{BCE}(P,Q) = -(1-y)\log_2(1-x) -y\log_2(x)
