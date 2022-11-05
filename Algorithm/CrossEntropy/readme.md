@@ -1,6 +1,6 @@
 # Cross Entropy 交叉熵
 
-![1](img/1.png)
+<img src="img/1.png" alt="1" style="zoom: 25%;" />
 
 ## 信息熵
 
