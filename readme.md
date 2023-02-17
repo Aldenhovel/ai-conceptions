@@ -9,7 +9,7 @@
 
 ## C
 
-- [Constructive Loss]
+- [Constructive Loss](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Constructive%20Loss)
 - [Cross Entropy 交叉熵](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/CrossEntropy)
 
 ## D
@@ -27,7 +27,7 @@
 
 ## R
 
-- [Receptive Field （卷积）感受野]
+- [Receptive Field （卷积）感受野](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Receptive%20Field)
 
 ## T
 
