@@ -12,18 +12,28 @@ CNN 中每一层输出特征图上一个像素点对应输入图像上的区域�
 ## 3 公式
 
 $$
-RF_{l+1} = (RF_l-1) \times stride + kernel\_size
+\begin{align}
+&RF_{L}=
+\begin{cases}
+k_1&,L=1\\
+(RF_{L-1}-1) \times s_L + k_{L}&, L=2,3...
+\end{cases}\\
+&\text{s.t.}&\\ 
+&k\text{=kernel size, } s\text{=stride, } L\text{=layer}\\
+\end{align}
 $$
 
 ## 4 实例
 
 假设神经网络：
+
 $$
 img[7, 7, 1] \rightarrow \text{Conv1}(3\times3,1) \rightarrow \text{Conv2}(3\times 3, 1)\rightarrow \text{Conv3}(3\times 3,1) \rightarrow logit
 $$
 
-1. $\text{Conv1}$ 中， $RF_1=kernel\_size=3$
-2. $\text{Conv2}$ 中，$RF_2=(3-1)\times1+3=5$
-3. $\text{Conv3}$ 中，$RF_3=(5-1)\times1+3=7$
+1. $\text{Conv1}$ 中， $RF_1=k_1=3$
+2. $\text{Conv2}$ 中， $RF_2=(3-1)\times1+3=5$
+3. $\text{Conv3}$ 中， $RF_3=(5-1)\times1+3=7$
 
 在 $\text{Conv3}$ 时感受野 $RF_3$ 等于 $7$ ，满足 $RF_{last} \ge H, W$ ，此神经网络可以完成全局语义信息提取。
+
