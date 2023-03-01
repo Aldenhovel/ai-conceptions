@@ -61,3 +61,76 @@ for seq in result:
 
 这是一个 Beam Search 例子，假设我们已经计算出语句每个位置单词的启发值（这里例子和真实的 NLP情况有所区别，真实的 NLP 里词是一个个产生的，不能一次产生全部）。这样可以得到 Beam Search 搜索结果，输出3个期望最高的语句。
 
+
+
+# 在 NLP 中使用 Beam Search 搜索生成语句的方法
+
+```python
+ def beam_search(self, image_path, beam_size=3):
+        assert callable(self.image_transform)
+        # Load the image
+        image = Image.open(image_path).convert('RGB')
+        image = self.image_transform(image.resize(self.image_shape))
+        image = image.unsqueeze(0)
+        self.model.eval()
+        with torch.no_grad():
+            image = image.to(self.device)
+            k = beam_size
+            topk_prev_tokens = torch.LongTensor([[self.field.vocab.stoi[self.field.init_token]]] * k).to(self.device)
+            topk_sequences = topk_prev_tokens
+            topk_logps = torch.zeros(k, 1).to(self.device)
+            complete_sequences, complete_sequence_logps = [], []
+            image_features = self.model.encode(image)
+            image_features = image_features.view(1, -1, self.model.hidden_size)
+            image_features = image_features.expand(k, -1, -1)
+            h_state, c_state = self.model.lstm_decoder.init_h0(image_features[:, 0, :]), self.model.lstm_decoder.init_c0(image_features[:, 0, :])
+            h_state, c_state = h_state.unsqueeze(0).repeat(self.model.lstm_decoder.layer*2, 1, 1), c_state.unsqueeze(0).repeat(self.model.lstm_decoder.layer*2, 1, 1) 
+            # Decoding
+            step = 1
+            while True:
+                if len(h_state.shape) < 3:
+                    h_state, c_state = h_state.unsqueeze(0), c_state.unsqueeze(0)
+                logit, h_state, c_state = self.model.lstm_decoder.decode(topk_prev_tokens.squeeze(1), h_state, c_state, image_features[:, step-1, :])
+                logp = F.log_softmax(logit, dim=1)
+                logp = topk_logps.expand_as(logp) + logp
+                if step == 1:
+                    topk_logps, topk_tokens = logp[0].topk(k, 0, True, True)
+                else:
+                    topk_logps, topk_tokens = logp.view(-1).topk(k, 0, True, True)
+                prev_tokens = topk_tokens // self.model.lstm_decoder.vocab_size
+                next_tokens = topk_tokens % self.model.lstm_decoder.vocab_size
+                topk_sequences = torch.cat((topk_sequences[prev_tokens], next_tokens.unsqueeze(1)), dim=1)
+                incomplete_indices = [indice for indice, next_token in enumerate(next_tokens) if next_token != self.field.vocab.stoi[self.field.eos_token]]
+                complete_indices = list(set(range(len(next_tokens))) - set(incomplete_indices))
+                if len(complete_indices) > 0:
+                    complete_sequences.extend(topk_sequences[complete_indices].tolist())
+                    complete_sequence_logps.extend(topk_logps[complete_indices])
+                k -= len(complete_indices) 
+                if k == 0:
+                    break
+                topk_sequences = topk_sequences[incomplete_indices]
+                h_state = h_state[:, prev_tokens[incomplete_indices], :]
+                c_state = c_state[:, prev_tokens[incomplete_indices], :]
+                image_features = image_features[prev_tokens[incomplete_indices]]
+                topk_logps = topk_logps[incomplete_indices].unsqueeze(1)
+                topk_prev_tokens = next_tokens[incomplete_indices].unsqueeze(1)
+                if step >= self.max_len:
+                    if len(complete_indices) == 0:
+                        complete_sequences.extend(topk_sequences.tolist())
+                        complete_sequence_logps.extend(topk_logps[incomplete_indices])
+                    break
+                step += 1       
+            i_s = torch.topk(torch.Tensor(complete_sequence_logps), 1, sorted=True).indices
+            captions, lenofcaptions = [], []
+            for i in i_s:
+                sequence = complete_sequences[i]
+                captions.append(' '.join([self.field.vocab.itos[token] for token in sequence if token not in 
+                                   {self.field.vocab.stoi[self.field.init_token],
+                                    self.field.vocab.stoi[self.field.eos_token],
+                                    self.field.vocab.stoi[self.field.pad_token]}]))      
+                lenofcaptions.append(len(sequence))
+            caption = captions[lenofcaptions.index(max(lenofcaptions))]
+            cq = self.model.get_context_query(image)
+        return caption, complete_sequence_logps, cq
+```
+
