@@ -24,6 +24,7 @@
 
 - [PCA Decomposition 主成分分析降维](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/PCA)
 - [Position Encoding 位置编码](https://github.com/Aldenhovel/ai-conceptions/tree/main/NLP/Position%20Encoding)
+- [Prompt](https://github.com/Aldenhovel/ai-conceptions/tree/main/NLP/Prompt)
 
 ## R
 
