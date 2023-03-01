@@ -29,6 +29,7 @@
 ## R
 
 - [Receptive Field （卷积）感受野](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Receptive%20Field)
+- [Low-rank Adaptation (RoLA)](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Low-rank%20Adaptation(LoRa))
 
 ## T
 
