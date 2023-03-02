@@ -1,6 +1,7 @@
 # AI领域的相关概念
 
-## 查询列表
+
+
 ## B
 
 - [BahdanauAttention and LuongAttention](https://github.com/Aldenhovel/ai-conceptions/blob/main/NLP/BahdanauAttention%20and%20LuongAttention/readme.md)
@@ -22,6 +23,7 @@
 
 ## L
 
+- [Low-rank Adaptation (LoRA)](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Low-rank%20Adaptation(LoRa))
 - [L1 Regularization L1正则化](https://github.com/Aldenhovel/ai-conceptions/blob/main/Algorithm/L1%20Regularization)
 
 ## P
@@ -33,7 +35,6 @@
 ## R
 
 - [Receptive Field （卷积）感受野](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Receptive%20Field)
-- [Low-rank Adaptation (LoRA)](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Low-rank%20Adaptation(LoRa))
 
 ## T
 
