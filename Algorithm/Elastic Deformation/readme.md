@@ -1,4 +1,4 @@
-# 弹性变形 Elastic Distortion
+# 弹性变形 Elastic Deformation
 
 ## 简介
 
@@ -68,5 +68,5 @@ if __name__ == '__main__':
 
 ## 参考文献
 
-[数据增强：弹性变形(Elastic Distortion)](https://zhuanlan.zhihu.com/p/342274228)
+[数据增强：弹性变形](https://zhuanlan.zhihu.com/p/342274228)
 
