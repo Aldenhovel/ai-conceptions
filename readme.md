@@ -16,6 +16,10 @@
 
 - [Dropout](https://github.com/Aldenhovel/ai-conceptions/blob/main/Algorithm/Dropout)
 
+## E
+
+- [Elastic Deformation 弹性变形（数据增强）](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Elastic%20Deformation)
+
 ## L
 
 - [L1 Regularization L1正则化](https://github.com/Aldenhovel/ai-conceptions/blob/main/Algorithm/L1%20Regularization)
