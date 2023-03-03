@@ -81,3 +81,11 @@
 
    3. 语义间隔问题的本质是二者的流形结构不一致，因此，解决此问题的着手点就在于将两者的流形调整到一致，再学习两者之间的映射。最简单的方法自然是将类别的语义表示调整到样本的流型上，即用类别语义表示的 K 近邻样本点，重新表示类别语义即可。
 
+## 参考文献
+
+[零次学习（Zero-Shot Learning）入门 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/34656727)
+
+[“维度灾难”之Hubness现象浅析 - 科学空间|Scientific Spaces (kexue.fm)](https://kexue.fm/archives/9147)
+
+[机器学习中的维数灾难_大愚若智_的博客-CSDN博客](https://blog.csdn.net/zbc1090549839/article/details/38929215)
+
