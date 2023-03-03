@@ -45,3 +45,7 @@
 
 - [UNet](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/UNet)
 
+## Z
+
+- [Zero-shot Learning](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Zero-shot%20Learning)
+
