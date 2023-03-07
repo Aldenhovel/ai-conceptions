@@ -23,6 +23,7 @@
 
 ## L
 
+- [Learning Rate Decay 学习率衰减](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Learning%20Rate%20Decay)
 - [Low-rank Adaptation (LoRA)](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Low-rank%20Adaptation(LoRa))
 - [L1 Regularization L1正则化](https://github.com/Aldenhovel/ai-conceptions/blob/main/Algorithm/L1%20Regularization)
 
