@@ -10,6 +10,7 @@
 
 ## C
 
+- [Cifar-10 / Cifar-100 数据集](https://github.com/Aldenhovel/i-love-coding/tree/main/py/ML/cifar10-cifar100)
 - [Constructive Loss](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Constructive%20Loss)
 - [Cross Entropy 交叉熵](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/CrossEntropy)
 
