@@ -46,6 +46,10 @@
 
 - [UNet](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/UNet)
 
+# V
+
+- [Visual Prompt Tuning (VPT)](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Visual%20Prompt%20Tuning)
+
 ## Z
 
 - [Zero-shot Learning](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Zero-shot%20Learning)
