@@ -22,6 +22,10 @@
 
 - [Elastic Deformation 弹性变形（数据增强）](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Elastic%20Deformation)
 
+## F
+
+- [Fine-grained Visual Classification (FGVC) 细粒度图像分类](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Fine-grained%20Visual%20Classification)
+
 ## L
 
 - [Learning Rate Decay 学习率衰减](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Learning%20Rate%20Decay)
