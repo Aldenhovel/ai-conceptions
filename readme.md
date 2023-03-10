@@ -26,6 +26,10 @@
 
 - [Fine-grained Visual Classification (FGVC) 细粒度图像分类](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Fine-grained%20Visual%20Classification)
 
+## H
+
+- [Harris Corner Detection 角点检测](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Harris%20Corner%20Detection)
+
 ## L
 
 - [Learning Rate Decay 学习率衰减](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Learning%20Rate%20Decay)
