@@ -16,7 +16,7 @@
 
 ## D
 
-- [Deconvolution 反卷积]
+- [Deconvolution 反卷积](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Deconvolution)
 - [Dropout](https://github.com/Aldenhovel/ai-conceptions/blob/main/Algorithm/Dropout)
 
 ## E
