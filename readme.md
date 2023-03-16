@@ -31,6 +31,10 @@
 
 - [Harris Corner Detection 角点检测](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Harris%20Corner%20Detection)
 
+## I
+
+- [Image Patching](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Image%20Patching)
+
 ## L
 
 - [Learning Rate Decay 学习率衰减](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Learning%20Rate%20Decay)
@@ -58,6 +62,7 @@
 
 ## V
 
+- [Vision Transformer (ViT)](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Vision%20Transformer)
 - [Visual Prompt Tuning (VPT)](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Visual%20Prompt%20Tuning)
 
 ## Z

@@ -79,5 +79,5 @@
 >logits=model(patches)
 >```
 >
->在这里 x 是原始图像 `[32, 3, 224, 224]` 经过 patching 后得到的特征向量（还没有扁平化和经过位置编码），详见 [Image Patching]()。
+>在这里 x 是原始图像 `[32, 3, 224, 224]` 经过 patching 后得到的特征向量（还没有扁平化和经过位置编码），详见 [Image Patching](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Image%20Patching)。
 
