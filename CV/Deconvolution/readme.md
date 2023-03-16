@@ -93,3 +93,69 @@
 >`MaxUnpool2d` 是最大池化操作的逆操作，可以用于还原经过最大池化操作压缩的特征图，还原其原始大小和特征信息。通常用于实现卷积神经网络的反向传播操作，从池化层反向传播梯度到卷积层，以训练卷积神经网络。
 >
 >因此，当需要将低维特征图放大到高维特征图时，应该使用 `ConvTranspose2d` 操作；当需要还原最大池化操作压缩的特征图时，应该使用 `MaxUnpool2d` 操作。需要注意的是，这两种操作的使用场景并不是互斥的，有些任务需要同时使用这两种操作来完成。
+
+## 使用 Deconvolution 制作 GAN Generator
+
+>**ChatGPT:**
+>
+>```python
+>import torch
+>import torch.nn as nn
+>
+>class Generator(nn.Module):
+>    def __init__(self, latent_dim):
+>        super(Generator, self).__init__()
+>        self.latent_dim = latent_dim
+>
+>        self.main = nn.Sequential(
+>            nn.ConvTranspose2d(latent_dim, 1024, kernel_size=4, stride=1, padding=0, bias=False),
+>            nn.BatchNorm2d(1024),
+>            nn.ReLU(True),
+>
+>            nn.ConvTranspose2d(1024, 512, kernel_size=4, stride=2, padding=1, bias=False),
+>            nn.BatchNorm2d(512),
+>            nn.ReLU(True),
+>
+>            nn.ConvTranspose2d(512, 256, kernel_size=4, stride=2, padding=1, bias=False),
+>            nn.BatchNorm2d(256),
+>            nn.ReLU(True),
+>
+>            nn.ConvTranspose2d(256, 128, kernel_size=4, stride=2, padding=1, bias=False),
+>            nn.BatchNorm2d(128),
+>            nn.ReLU(True),
+>
+>            nn.ConvTranspose2d(128, 3, kernel_size=4, stride=2, padding=1, bias=False),
+>            nn.Tanh()
+>        )
+>
+>    def forward(self, z):
+>        z = z.view(z.size(0), self.latent_dim, 1, 1)
+>        x = self.main(z)
+>        return x
+>
+>```
+>
+>```python
+>import torch
+>from torchvision.utils import save_image
+>
+># 定义超参数
+>latent_dim = 100
+>batch_size = 64
+>num_epochs = 100
+>
+># 定义生成器
+>generator = Generator(latent_dim)
+>
+># 定义噪声张量
+>z = torch.randn(batch_size, latent_dim)
+>
+># 使用生成器生成图像
+>fake_images = generator(z)
+>
+># 将生成的图像保存到文件中
+>save_image(fake_images.data[:25], 'fake_images.png', nrow=5, normalize=True)
+>
+>```
+>
+>输入 `latent_dim` 维噪声，输出 `[3, 64, 64]` 重组图像。
