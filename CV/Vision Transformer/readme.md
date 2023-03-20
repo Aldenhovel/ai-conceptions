@@ -81,3 +81,20 @@
 >
 >在这里 x 是原始图像 `[32, 3, 224, 224]` 经过 patching 后得到的特征向量（还没有扁平化和经过位置编码），详见 [Image Patching](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Image%20Patching)。
 
+## torchvision 引入
+
+在 `torchvision.models` 中已经支持导入 `vit-s/b/l/h` 以及相关 `ImageNet` 预训练权重：
+
+```python
+from torchvision.models import vit_b_16, ViT_B_16_Weights
+model = vit_b_16(weights=ViT_B_16_Weights.IMAGENET1K_V1)
+model.heads.head = nn.Linear(in_features=768, out_features=100)
+
+from torchinfo import summary
+summary(model)
+
+img = torch.randn(32, 3, 224, 224)
+model(img)
+```
+
+需要注意 `vit-s/b` 输入图像尺寸为 $224\times224$ ，而 `vit-l/h` 为 $384\times384$ 。
