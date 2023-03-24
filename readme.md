@@ -5,6 +5,7 @@
 ## B
 
 - [BahdanauAttention and LuongAttention](https://github.com/Aldenhovel/ai-conceptions/blob/main/NLP/BahdanauAttention%20and%20LuongAttention/readme.md)
+- [Batch Gradient Descent (BGD) 批梯度下降]
 - [Beam Search 束搜索](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Beam%20Search)
 - [Bipartite Matching and Hungarian Algorithm 二分图匹配与匈牙利算法](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Bipartite%20Matching%20and%20Hungarian%20Algorithm)
 
@@ -52,8 +53,13 @@
 - [Receptive Field （卷积）感受野](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Receptive%20Field)
 - [Reinforcement Learning from Human Feedback (RLHF)](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/RLHF)
 
+## S
+
+- [Stochastic Gradient Descent (SGD) 随机梯度下降]
+
 ## T
 
+- [TensorRT]
 - [Tokenize 标记解析](https://github.com/Aldenhovel/ai-conceptions/tree/main/NLP/Tokenize)
 
 ## U
