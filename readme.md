@@ -5,7 +5,7 @@
 ## B
 
 - [BahdanauAttention and LuongAttention](https://github.com/Aldenhovel/ai-conceptions/blob/main/NLP/BahdanauAttention%20and%20LuongAttention/readme.md)
-- [Batch Gradient Descent (BGD) 批梯度下降]
+- [Batch Gradient Descent (BGD) 批梯度下降](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/SGD%20and%20BGD)
 - [Beam Search 束搜索](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Beam%20Search)
 - [Bipartite Matching and Hungarian Algorithm 二分图匹配与匈牙利算法](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Bipartite%20Matching%20and%20Hungarian%20Algorithm)
 
@@ -55,11 +55,11 @@
 
 ## S
 
-- [Stochastic Gradient Descent (SGD) 随机梯度下降]
+- [Stochastic Gradient Descent (SGD) 随机梯度下降](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/SGD%20and%20BGD)
 
 ## T
 
-- [TensorRT]
+- [TensorRT](https://github.com/Aldenhovel/ai-conceptions/tree/main/Deploy/TensorRT)
 - [Tokenize 标记解析](https://github.com/Aldenhovel/ai-conceptions/tree/main/NLP/Tokenize)
 
 ## U
