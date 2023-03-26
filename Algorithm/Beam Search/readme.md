@@ -134,3 +134,14 @@ for seq in result:
         return caption, complete_sequence_logps, cq
 ```
 
+# beam search 的一些变种
+
+- Length-normalized beam search: This approach aims to mitigate the bias towards shorter sequences that is often seen with standard beam search. Instead of selecting the candidate sequence with the highest score, the length-normalized beam search divides the score by the length of the sequence to give preference to longer sequences.
+
+- Diverse beam search: This method aims to generate a more diverse set of output sequences by encouraging the model to explore different paths in the search space. This is typically achieved by adding a diversity penalty term to the objective function that encourages the selection of candidate sequences that are dissimilar to previously selected ones.
+
+- Ensemble beam search: This approach involves running beam search on multiple models or model checkpoints in parallel and combining the results to generate the final output. This can help to reduce the risk of the search getting stuck in a suboptimal solution and increase the diversity of the output.
+
+- Sampling-based beam search: This method involves sampling from the distribution of possible outputs at each step instead of selecting the candidate with the highest score. This can help to explore a wider range of possible outputs and reduce the risk of getting stuck in a local optimum.
+
+- Constrained beam search: This approach involves incorporating constraints into the search process to ensure that the generated output satisfies certain conditions. This can be useful in scenarios where the output needs to adhere to certain rules or constraints, such as grammaticality or semantic coherence.
