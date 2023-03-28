@@ -71,6 +71,10 @@
 - [Vision Transformer (ViT)](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Vision%20Transformer)
 - [Visual Prompt Tuning (VPT)](https://github.com/Aldenhovel/ai-conceptions/tree/main/CV/Visual%20Prompt%20Tuning)
 
+## X
+
+- [Xavier initialization](https://github.com/Aldenhovel/ai-conceptions/blob/main/Algorithm/Xavier%20Initialization)
+
 ## Z
 
 - [Zero-shot Learning](https://github.com/Aldenhovel/ai-conceptions/tree/main/Algorithm/Zero-shot%20Learning)
